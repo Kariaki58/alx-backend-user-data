@@ -36,3 +36,9 @@ def unauthorized():
 def Forbidden():
   """abort route"""
   abort(403)
+
+
+@app_views.errorhandler(404)
+def not_found(error) -> str:
+    """Not found"""
+    return jsonify({"error": "Not found"}), 404

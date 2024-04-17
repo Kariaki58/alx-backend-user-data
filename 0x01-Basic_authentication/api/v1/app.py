@@ -20,6 +20,7 @@ if os.getenv("AUTH_TYPE") == "basic_auth":
 elif os.getenv("AUTH_TYPE") == "auth":
     auth = Auth()
 
+
 @app.before_request
 def before_request_func():
     """before request func"""

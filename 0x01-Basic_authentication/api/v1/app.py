@@ -15,9 +15,10 @@ app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 auth = None
 
-if os.getenv("AUTH_TYPE") == "auth":
+if os.getenv("AUTH_TYPE") == "basic_auth":
     auth = Auth()
-
+elif os.getenv("AUTH_TYPE") == "auth":
+    auth = Auth()
 
 @app.before_request
 def before_request_func():
@@ -45,8 +46,7 @@ def forbidden(error) -> str:
 
 @app.errorhandler(404)
 def not_found(error) -> str:
-    """ Not found handler
-    """
+    """Not found"""
     return jsonify({"error": "Not found"}), 404
 
 

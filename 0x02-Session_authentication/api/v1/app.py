@@ -20,11 +20,11 @@ if os.getenv("AUTH_TYPE") == "basic_auth":
 elif os.getenv("AUTH_TYPE") == "session_auth":
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
-    
+
 elif os.getenv("AUTH_TYPE") == "auth":
     auth = Auth()
 
-    
+
 @app.before_request
 def before_request_func():
     """before request func"""

@@ -47,6 +47,7 @@ def before_request_func():
     print(auth.current_user(request))
     request.current_user = auth.current_user(request)
 
+
 @app.errorhandler(403)
 def forbidden(error) -> str:
     """"Error handler"""

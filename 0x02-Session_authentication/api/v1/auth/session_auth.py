@@ -9,12 +9,12 @@ from uuid import uuid4
 class SessionAuth(Auth):
     """Session Authentication"""
     user_id_by_session_id = {}
-    
+
     def create_session(self, user_id: str = None) -> str:
         """create session function"""
         if user_id is None:
             return None
-        if  not isinstance(user_id, str):
+        if not isinstance(user_id, str):
             return None
         else:
             session_id = uuid4()

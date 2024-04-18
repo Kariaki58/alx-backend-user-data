@@ -3,7 +3,7 @@
 from flask import request
 from typing import List, TypeVar
 from .auth import Auth
-from uuid import uuid4
+from uuid import uuid4, UUID
 
 
 class SessionAuth(Auth):
@@ -20,3 +20,12 @@ class SessionAuth(Auth):
             session_id = uuid4()
             SessionAuth.user_id_by_session_id[session_id] = user_id
             return session_id
+
+    def user_id_for_session_id(self, session_id: str = None) -> str:
+        """user id for session id"""
+        if session_id is None:
+            return None
+        if not isinstance(session_id, str):
+            return None
+        user_id = SessionAuth.user_id_by_session_id.get(session_id)
+        return user_id

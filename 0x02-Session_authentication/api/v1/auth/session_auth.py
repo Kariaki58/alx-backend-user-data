@@ -35,7 +35,13 @@ class SessionAuth(Auth):
         """return if a user session exists"""
         if request is None:
             return None
-        session_cookie_id = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_cookie_id)
+
+        session_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_id)
+
+        if user_id is None:
+            return None
+
         user = User.get(user_id)
         return user
+

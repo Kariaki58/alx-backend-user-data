@@ -14,11 +14,9 @@ class SessionAuth(Auth):
         """create session function"""
         if user_id is None:
             return None
-        if  isinstance(user_id, str):
+        if  not isinstance(user_id, str):
             return None
         else:
             session_id = uuid4()
             SessionAuth.user_id_by_session_id[session_id] = user_id
             return session_id
-    
-            

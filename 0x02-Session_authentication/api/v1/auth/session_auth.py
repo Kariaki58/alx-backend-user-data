@@ -33,15 +33,15 @@ class SessionAuth(Auth):
     
     def current_user(self, request=None):
         """return if a user session exists"""
-        if request is None:
+        if not request:
             return None
 
         session_id = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_id)
-
-        if user_id is None:
+        if not session_id:
             return None
 
-        user = User.get(user_id)
-        return user
+        user_id = self.user_id_for_session_id(session_id)  # Retrieve User ID from session ID
+        if not user_id:
+            return None
 
+        return User.get(user_id)

@@ -2,8 +2,10 @@
 """ Auth class """
 from flask import request
 from typing import List, TypeVar
+from ..views.users import User
 from .auth import Auth
 from uuid import uuid4, UUID
+import os
 
 
 class SessionAuth(Auth):
@@ -28,3 +30,12 @@ class SessionAuth(Auth):
         else:
             user_id = SessionAuth.user_id_by_session_id.get(session_id)
             return user_id
+    
+    def current_user(self, request=None):
+        """return if a user session exists"""
+        if request is None:
+            return None
+        session_cookie_id = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(session_cookie_id)
+        user = User.get(user_id)
+        return user

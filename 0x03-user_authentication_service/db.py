@@ -14,7 +14,6 @@ from user import Base, User
 class DB:
     """DB class
     """
-
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
@@ -39,7 +38,6 @@ class DB:
         self._session.commit()
         return new_user
 
-
     def find_user_by(self, **kwargs) -> User:
         """find user by email"""
         try:
@@ -49,3 +47,11 @@ class DB:
         except InvalidRequestError:
             raise
         return get_user_by
+
+    def update_user(self, user_id, **kwargs):
+        user = self.find_user_by(id=user_id)
+        if not user:
+            raise ValueError
+        for _, val in kwargs.items():
+            user.hashed_password = val
+        return user

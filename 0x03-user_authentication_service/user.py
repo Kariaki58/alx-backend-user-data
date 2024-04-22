@@ -1,11 +1,15 @@
+#!/usr/bin/env python3
+"""user class"""
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.declarative import declarative_base
 
 app = Flask(__name__)
+Base = declarative_base()
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(Base):
     """user database table"""
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
